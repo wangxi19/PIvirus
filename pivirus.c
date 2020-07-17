@@ -591,7 +591,7 @@ void pi_do_init(void)
                                                                     (tmp_dynseg->d_un.d_ptr - target_code_vaddr);
                 break;
 
-            case DT_JMPREL:
+            case DT_JMPREL://.rela.plt  The below arithmatic is incorrect, but result is correct. quite funny. should use (target_elf->mmap + (offset of the segment that contains the .rela.plt) + (tmp_dynseg->d_un.d_ptr - (viraddr of the segment that contains the .rela.plt)))
                 target_elf->elfstructs.pltrela = (Elf64_Rela *)(target_elf->mmap + target_code_offset +
                                                                     (tmp_dynseg->d_un.d_ptr - target_code_vaddr));
                 break;
